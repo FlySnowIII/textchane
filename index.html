@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+var changeKey = {
+'@a' : 'label',
+'@b' : 'name'
+};
+
+var data =
+[
+{'label':'クリニック名称','name':'comname'},
+{'label':'法人名','name':'corporation'},
+{'label':'設立年月日','name':'startdate'},
+{'label':'企業概要','name':'info'},
+{'label':'業種','name':'industry'},
+{'label':'資本金','name':'money'},
+{'label':'売上高','name':'sales'},
+{'label':'売上高年度','name':'salesyear'},
+{'label':'従業員数','name':'employees'},
+{'label':'従業員構成詳細','name':'employeesinfo'},
+{'label':'特徴','name':'feature'},
+{'label':'事業内容','name':'contents'},
+{'label':'本社郵便番号','name':'zip'},
+{'label':'本社所在都道府県','name':'prefectures'},
+{'label':'本社所在市町村番地','name':'city'},
+{'label':'本社所在ビル室','name':'address'},
+{'label':'電話番号1','name':'phone1'},
+{'label':'電話番号2','name':'phone2'},
+{'label':'電話番号3','name':'phone3'},
+{'label':'FAX','name':'fax'},
+{'label':'ホームページ','name':'homepage'},
+{'label':'Facebook','name':'facebook'},
+{'label':'twriter','name':'twriter'},
+{'label':'line','name':'line'},
+{'label':'instagram','name':'instagram'},
+{'label':'診療科目','name':'examination'},
+{'label':'開院時間','name':'opening'},
+{'label':'休診日','name':'closedday'},
+{'label':'ユニット数','name':'units'},
+{'label':'ユニット詳細','name':'unitsinfo'},
+{'label':'設備','name':'device'},
+{'label':'医院長経歴','name':'aboutboss'},
+{'label':'平均患者数','name':'patients'}
+];
+
+function run(){
+    var templateStr = document.getElementById('template').value;
+    var resault = document.getElementById('resault');
+    var reasultStr = "";
+    console.table(data);
+    // resault.value = template.value.replace(/@a/g,"TANG");
+    for (let index = 0; index < data.length; index++) {
+        const element = data[index];
+        var tempStr = templateStr.replace(/@a/g,element.label);
+        tempStr = tempStr.replace(/@b/g,element.name);
+
+        reasultStr += tempStr + "\n";
+        
+    }
+    resault.value = reasultStr;
+}
+    
+    
+    </script>
+</head>
+<body>
+    <textarea name="template" id="template" cols="200" rows="30">
+<div class="form-group row">
+    <div class="col-md-1"></div>
+    <label for="staticEmail" class="col-md-2 text-right">@a</label>
+    <div class="col-md-8 {{ $errors->has('@b') ? ' has-error' : '' }}">
+        <input type="text" class="form-control" id="@b" name="@b" value="{{ isset($comInfo) ? $comInfo->@b : old('@b')}}" placeholder="最大50文字" maxlength="50" required >
+    </div>
+</div><!--form-row-->
+    </textarea>
+    <br>
+    <button onclick="run();">Go</button>
+    <br>
+    <textarea name="resault" id="resault" cols="200" rows="30"></textarea>
+</body>
+</html>
